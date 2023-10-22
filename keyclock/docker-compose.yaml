@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  keycloak:
+    image: jboss/keycloak
+    environment:
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
+    expose:
+      - 8080
+    command:
+      - "-b 0.0.0.0"
+      - "-Dkeycloak.import=/opt/jboss/keycloak/import-realm.json"
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./import-realm.json:/opt/jboss/keycloak/import-realm.json
