@@ -36,18 +36,35 @@
   "failureFactor": 5,
   "groups": [
     {
-      "name": "Starks",
-      "path": "/Starks",
+      "name": "Admin",
+      "path": "/Admin",
       "attributes": {},
-      "realmRoles": [],
+      "realmRoles": [
+        "ADMIN_READ",
+        "ADMIN_WRITE"
+      ],
       "clientRoles": {},
       "subGroups": []
     },
     {
-      "name": "Lannisters",
-      "path": "/Lannisters",
+      "name": "Profissional",
+      "path": "/Profissional",
       "attributes": {},
-      "realmRoles": [],
+      "realmRoles": [
+        "PROFESSIONAL_READ",
+        "PROFESSIONAL_WRITE"
+      ],
+      "clientRoles": {},
+      "subGroups": []
+    },
+    {
+      "name": "Cliente",
+      "path": "/Cliente",
+      "attributes": {},
+      "realmRoles": [
+        "CLIENT_READ",
+        "CLIENT_WRITE"
+      ],
       "clientRoles": {},
       "subGroups": []
     }
@@ -75,8 +92,8 @@
   "clients": [
     {
       "clientId": "seu-cliente",
-      "name": "NodeJS Console App",
-      "description": "NodeJS Console App",
+      "name": "Cliente exemplo",
+      "description": "Cliente exemplo",
       "rootUrl": "",
       "adminUrl": "",
       "baseUrl": "",
@@ -115,6 +132,21 @@
       "nodeReRegistrationTimeout": -1,
       "protocolMappers": [
         {
+          "id": "672726b6-7d21-4a48-9f7f-39abf2569928",
+          "name": "groups",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-realm-role-mapper",
+          "consentRequired": false,
+          "config": {
+            "multivalued": "true",
+            "user.attribute": "foo",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "groups",
+            "jsonType.label": "String"
+          }
+        },
+        {
           "name": "role list",
           "protocol": "saml",
           "protocolMapper": "saml-role-list-mapper",
@@ -139,7 +171,19 @@
       ],
       "useTemplateConfig": false,
       "useTemplateScope": false,
-      "useTemplateMappers": true
+      "useTemplateMappers": true,
+      "defaultClientScopes": [
+        "web-origins",
+        "profile",
+        "roles",
+        "email"
+      ],
+      "optionalClientScopes": [
+        "address",
+        "phone",
+        "offline_access",
+        "microprofile-jwt"
+      ]
     },
     {
       "id": "fb5441f2-af3f-4f86-b8de-8d8054b777fc",
@@ -174,7 +218,7 @@
         "READ",
         "WRITE"
       ],
-      "groups": ["Starks"],
+      "groups": ["Admin"],
       "clientRoles": {
         "account": [
           "view-profile",

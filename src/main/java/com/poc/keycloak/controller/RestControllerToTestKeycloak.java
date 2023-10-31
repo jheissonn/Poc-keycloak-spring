@@ -22,5 +22,11 @@ public class RestControllerToTestKeycloak {
         return "Based on READ rule";
     }
 
+    @GetMapping("/admin-read")
+    @PreAuthorize("hasAuthority('ADMIN_READ')")
+    public String getAdminRead(){
+        return "Based on ADMIN_READ rule";
+    }
+
 }
 
